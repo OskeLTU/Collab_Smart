@@ -86,3 +86,54 @@ void loop() {
   
   }
 }
+
+#include <Arduino.h>
+
+int motor1A = 0;  
+int motor1B = 8;  
+int motor2A = 1;  
+int motor2B = 12; 
+
+void setMotorPins(int pinA, int pinB, int speedA, int speedB) {
+  analogWrite(pinA, speedA);
+  analogWrite(pinB, speedB);
+}
+
+void motor1Forward(int speed) {
+  setMotorPins(motor1A, motor1B, speed, 0);
+}
+
+void motor1Backward(int speed) {
+  setMotorPins(motor1A, motor1B, 0, speed);
+}
+
+void motor1Stop() {
+  setMotorPins(motor1A, motor1B, 0, 0);
+}
+
+void motor2Forward(int speed) {
+  setMotorPins(motor2A, motor2B, speed, 0);
+}
+
+void motor2Backward(int speed) {
+  setMotorPins(motor2A, motor2B, 0, speed);
+}
+
+void motor2Stop() {
+  setMotorPins(motor2A, motor2B, 0, 0);
+}
+
+void setup() {
+  Serial.begin(115200);
+
+  pinMode(motor1A, OUTPUT);
+  pinMode(motor1B, OUTPUT); 
+  pinMode(motor2A, OUTPUT);
+  pinMode(motor2B, OUTPUT);
+}
+
+void loop() {
+  Serial.println("Motors Forward");
+  motor1Forward(255);
+  motor2Forward(255);
+}
